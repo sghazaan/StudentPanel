@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const dotenv = require('dotenv');
 const app = express();
+dotenv.config();
 const StudentRoutes = require('./routes/studentRoutes');
-MONGO_URI= "mongodb+srv://sghazaan:88888888@onlineeducationplatform.jjhy2ci.mongodb.net/OurCoursera"
-const db= MONGO_URI 
+//MONGO_URI= "mongodb+srv://sghazaan:88888888@onlineeducationplatform.jjhy2ci.mongodb.net/OurCoursera"
+const db= process.env.MONGO_URI 
 port = 3000
 
 // Connect to MongoDB

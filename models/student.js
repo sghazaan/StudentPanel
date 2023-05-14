@@ -19,7 +19,11 @@ const studentSchema = new mongoose.Schema({
       password: {
         type: String,
         required: true
-        },    
+        },   
+     enrolledCourses: [{
+         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
+         }] 
       
 });
 module.exports = mongoose.model('Student', studentSchema);
