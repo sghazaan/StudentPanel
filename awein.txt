@@ -1,8 +1,7 @@
 {
-    "name": "Shah Rukh",
-    "fName": "Ghazaan",
-    "nicNumber": 123456789,
+    "firstName": "Shah Rukh",
+    "lastName": "Ghazaan",
     "email": "i200995@nu.edu.pk",
     "password": "12345678",
-    "role": "admin"
+    "role": "student"
 }

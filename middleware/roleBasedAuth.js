@@ -22,7 +22,7 @@ exports.requireStudentRole = async (req, res, next) => {
     next();
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error occured here');
+    res.status(500).send('Server error occured here in requireStudentRole');
   }
 };
 

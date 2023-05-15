@@ -1,8 +1,9 @@
 const Student = require('../models/user');
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
+const Course = require('../models/course');
  exports.createStudent = async(req, res) => {
-    const { name, fName, nicNumber, email, password, role } = req.body;
+    const { firstName, lastName,  email, password, role } = req.body;
     try{
         const existingUser = await Student.findOne({email: email});
         if(existingUser){
@@ -10,9 +11,8 @@ const auth = require('../middleware/auth');
         } 
         const hashedPassword = await bcrypt.hash(password, 10);
         const student = new Student({
-            name: name,
-            fName: fName,
-            nicNumber: nicNumber,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: hashedPassword,
             role: role
@@ -117,6 +117,25 @@ exports.login = async (req, res) => {
         }catch(err){
             res.status(404).json("Some error occured while deleting")
         }
+    }
+    exports.getAllCourses = async (req, res) => {
+        try{
+            const courses = await Course.find();
+            res.status(200).json(courses);      
+        } catch(err){
+            console.log(err);
+            res.status(500).json({message: "Something went wrong in catch part of getAllCourses"});
+        }
+    }
+    exports.getCoursesById = async (req, res) => {
+      const courseId = req.params.courseId;
+      try{
+        const course = await Course.findById(courseId);
+        res.status(200).json(course);      
+      } catch(err){
+          console.log(err);
+          res.status(500).json({message: "Something went wrong in catch part of getCoursesById"});
+      }
     }
       
 

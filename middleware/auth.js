@@ -10,7 +10,6 @@ const secret = process.env.JWT_SECRET;
 }
  exports.getStudent = (req, res, next) => {
     try{
-       // console.log("getStudent called")
         let token = req.headers.authorization.split(" ")[1];
         if(token){
          let student = jwt.verify(token, secret);
