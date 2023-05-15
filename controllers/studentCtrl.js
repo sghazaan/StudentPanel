@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
 
 
     exports.updateProfile = async (req, res) => {
-        const { email, password, fName, nicNumber, name } = req.body;
+        const { email, password, firstName, lastName } = req.body;
         let sameEmail = false;
         if(email){
         const existingStudent = await Student.findOne({email: email});
@@ -72,9 +72,8 @@ exports.login = async (req, res) => {
         } 
     }
         const studentFields = {};
-        if (name) studentFields.name = name;
-        if (fName) studentFields.fName = fName;
-        if (nicNumber) studentFields.nicNumber = nicNumber;
+        if (firstName) studentFields.name = name;
+        if (lastName) studentFields.fName = fName;
         if (email) studentFields.email = email;
         if (password) studentFields.password = await bcrypt.hash(password, 10);
       

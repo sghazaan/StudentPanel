@@ -51,3 +51,22 @@ exports.placeComment = async (req, res) => {
         res.status(500).json({message: "Something went wrong in catch part of placeComment"});
     }
 }
+
+exports.viewComments = async (req, res) => {
+    try{
+        console.log("viewComments function is called");
+        const courseId = req.params.courseId;
+        const studentId = req.params.id;
+        const course = await Course.findById(courseId);
+        const student = await Student.findById(studentId); 
+        console.log(student);
+        if( (!course)){
+                res.status(404).json("Course not found");
+        }
+        const forumObj = await Forum.find(courseId);
+        res.status(200).json(forumObj);
+
+    }catch(err){
+        res.status(500).json({message: "Something went wrong in catch part of viewComments"});
+    }
+}
