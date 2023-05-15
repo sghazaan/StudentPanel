@@ -1,10 +1,8 @@
-const Student = require('../models/student');
+const Student = require('../models/user');
 const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
  exports.createStudent = async(req, res) => {
-    const { name, fName, nicNumber, email, password } = req.body;
+    const { name, fName, nicNumber, email, password, role } = req.body;
     try{
         const existingUser = await Student.findOne({email: email});
         if(existingUser){
@@ -17,6 +15,7 @@ const auth = require('../middleware/auth');
             nicNumber: nicNumber,
             email: email,
             password: hashedPassword,
+            role: role
         });
         await student.save();
         const token = auth.setStudent(student);

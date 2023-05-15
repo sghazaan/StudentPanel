@@ -3,5 +3,6 @@
     "fName": "Ghazaan",
     "nicNumber": 123456789,
     "email": "i200995@nu.edu.pk",
-    "password": "12345678"
+    "password": "12345678",
+    "role": "admin"
 }
