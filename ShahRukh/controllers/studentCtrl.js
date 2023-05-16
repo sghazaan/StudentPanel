@@ -72,8 +72,8 @@ exports.login = async (req, res) => {
         } 
     }
         const studentFields = {};
-        if (firstName) studentFields.name = name;
-        if (lastName) studentFields.fName = fName;
+        if (firstName) studentFields.name = firstName;
+        if (lastName) studentFields.fName = lastName;
         if (email) studentFields.email = email;
         if (password) studentFields.password = await bcrypt.hash(password, 10);
       
