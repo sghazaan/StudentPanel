@@ -1,2 +1,2 @@
 # StudentPanel
-Student Panel of Web Project
+Student Panel Online Education Platform implemented by using Express.js and MomgoDB
