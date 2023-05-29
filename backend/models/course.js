@@ -31,7 +31,13 @@ const courseSchema = new mongoose.Schema({
   start_date: {
     type: Date,
     default: Date.now()
-  }
+  },
+  comment: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Forum',
+    }
+  ],
 });
 
 const Course = mongoose.model('Course', courseSchema);
