@@ -1,0 +1,32 @@
+├── controllers
+│   ├── auth.js
+│   ├── course.js
+│   ├── quiz.js
+│   ├── assignment.js
+│   └── forum.js
+├── models
+│   ├── user.js
+│   ├── course.js
+│   ├── lecture.js
+│   ├── quiz.js
+│   ├── assignment.js
+│   └── forum.js
+├── routes
+│   ├── auth.js
+│   ├── course.js
+│   ├── quiz.js
+│   ├── assignment.js
+│   └── forum.js
+├── middleware
+│   ├── auth.js
+│   └── error.js
+├── utils
+│   ├── validation.js
+│   └── email.js
+├── app.js
+├── server.js
+└── config.js
+
+
+
+

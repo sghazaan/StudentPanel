@@ -1,0 +1,7 @@
+{
+    "firstName": "Shah Rukh",
+    "lastName": "Ghazaan",
+    "email": "i200995@nu.edu.pk",
+    "password": "12345678",
+    "role": "student"
+}
