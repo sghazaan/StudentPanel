@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 //import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-
-const Signup = () => {
+const UpdateProfile = () => {
+  const{id} = useParams();
  const  navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
@@ -28,23 +28,26 @@ const Signup = () => {
 
       const sendFormData = async (data) => {
         try {
-          const email = data.email
-          const response = await fetch('http://localhost:3001/students/signup', {
-            method: 'POST',
+          const token = localStorage.getItem('token'); 
+            console.log('id is', id); 
+          const response = await fetch(`http://localhost:3001/students/updateProfile/${id}`, {
+            method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, 
+
             },
             body: JSON.stringify(data),
           });
     
           // Handle the response from the backend
           if (response.ok) {
-            // Signup successful
-            console.log('Signup successful');
-            navigate('/login');
+            // Update successful
+            console.log('Update successful');
+            navigate(`/${id}`);
           } else {
-            // Signup failed
-            console.log('Signup failed');
+            // Update failed
+            console.log('Update failed');
           }
         } catch (error) {
           console.error('Error sending form data:', error);
@@ -59,7 +62,7 @@ const Signup = () => {
 <div className="container bg-light justify-content-between align-items-center">
     <div className="row">
 <div className="col-md-6">
-    <h2 className="pt-4">Sign Up</h2>
+    <h2 className="pt-4">Update Profile</h2>
     <form className="lead" onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="firstName" className="form-label">First Name</label>
@@ -94,11 +97,11 @@ const Signup = () => {
         <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
         <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm Password" onChange={handleChange}/>
       </div> */}
-      <button type="submit" className="btn btn-warning">Sign Up</button>
+      <button type="submit" className="btn btn-warning">Update Changes</button>
     </form>
   </div>
 </div>
 </div>        </div>
     )
 }
-export default Signup;
+export default UpdateProfile;

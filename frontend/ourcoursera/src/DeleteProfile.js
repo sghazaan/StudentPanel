@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-const Login = () => {
+import { useNavigate, useParams } from 'react-router-dom';
+const DeleteProfile = () => {
+  const { id } = useParams();
+  const cleanedId = id.slice(0, -1); // Remove the last character
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -22,49 +24,27 @@ const Login = () => {
 
   const sendFormData = async (data) => {
     try {
-      const response = await fetch('http://localhost:3001/students/login', {
-        method: 'POST',
+        const token = localStorage.getItem('token'); 
+        console.log('id is', cleanedId);
+      const response = await fetch(`http://localhost:3001/students/deleteProfile/${cleanedId}`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
         },
         body: JSON.stringify(data),
       });
 
+      // Handle the response from the backend
       if (response.ok) {
-        console.log('Login successful');
-        const responseData = await response.json(); // Parse the response body as JSON
-        const { _id } = responseData.student;
-        const token = responseData.token;
-        localStorage.setItem('token', token);
-
-        // console.log('id is', _id);
-         navigate(`/${_id}`);
-
-
-        // try {
-        //   const email = data.email;
-        //  // console.log('email in Login.js is', email);
-        //   const idResponse = await fetch(`http://localhost:3001/students/getId/${email}`, {
-        //     method: 'GET',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //   });
-        //   if(idResponse.ok){
-        //     const { _id } = await idResponse.json(); // Parse the response body as JSON
-        //    // console.log('id is', _id);
-        //     navigate(`/${_id}`);
-        //   } else {
-        //     console.log('else part: Error getting student id from database');
-        //   }
-        // } catch (error) {
-        //   console.error('Error getting student id from database:', error);
-        // }
-
+        // Delete Profile successful
+       // const email = data.email;
+        console.log('Delete Profile successful');
+        navigate('/login');
 
       } else {
-        // Login failed
-        console.log('Login failed');
+        // Delete Profile failed
+        console.log('Delete Profile failed');
       }
     } catch (error) {
       console.error('Error sending form data:', error);
@@ -75,7 +55,7 @@ const Login = () => {
         <div className="container bg-light">
         <div className="row">
     <div className="col-md-6">
-        <h2 className="pt-4">Log in</h2>
+        <h2 className="pt-4">Delete Profile</h2>
         <form className="lead" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="signupEmail" className="form-label">Email address</label>
@@ -87,11 +67,11 @@ const Login = () => {
             <input type="password" className="form-control" id="signupPassword" placeholder="Password"
             onChange={handleChange} value={formData.password} name="password"/>
           </div>
-          <button type="submit" className="btn btn-warning">Log in</button>
+          <button type="submit" className="btn btn-warning">Delete Profile</button>
         </form>
       </div>
     </div>
     </div>
     )
 }
-export default Login;
+export default DeleteProfile;

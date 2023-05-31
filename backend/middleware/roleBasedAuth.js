@@ -15,6 +15,24 @@ exports.requireAdminRole = async (req, res, next) => {
 
 exports.requireStudentRole = async (req, res, next) => {
   try {
+    // try{
+    //   const email = req.body.email;
+    //   console.log("Email is: ", email)
+    //   let u = await User.findOne({ email: email });
+    //   if(!u){
+    //     return res.status(403).json({ msg: 'Student not found' });
+    //   } 
+    //   if(u.role !== 'student'){
+    //     console.log("Access denied: Role of student required")
+    //     return res.status(403).json({ msg: 'Access denied: role of the student required' });
+    //   }
+    //   console.log("Access granted: Role of student was required")
+    //   next();
+    //   return;
+    // }catch(err){
+    //   console.log("Access denied: Role of student required");
+    // }
+    //  res.status(500).send('Server error occured here');
     const user = await User.findById(req.params.id);
     if (user.role !== 'student') {
       return res.status(403).json({ msg: 'Access denied: role of the student required' });

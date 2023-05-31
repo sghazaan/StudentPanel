@@ -1,4 +1,17 @@
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 const Home = () => {
+    const { id } = useParams();
+    const  navigate = useNavigate();
+    const handleUpdateProfile = () => {
+         console.log('id in Home.js UPDATE is', id);
+        navigate(`/updateProfile/${id}`);
+
+    }
+    const handleDeleteProfile = () => {
+        console.log('id in Home.js DEL is', id);
+        navigate(`/deleteProfile/${id}}`);
+    }
     return(
         <div>
              <section id="nav-bar">
@@ -9,22 +22,33 @@ const Home = () => {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarMenu">
-                <ul className="navbar-nav ms-auto">
-                    <li className="nav-item px-1">
+                <ul className="navbar-nav flex-colum">
+                    <li className="nav-item m-2">
                         <a href="#allCourses" className="nav-link">All Courses</a>
                     </li>
-                    <li className="nav-item px-1">
+                    <li className="nav-item m-2">
                         <a href="#allInstructors" className="nav-link">All Instructors</a>
                     </li>
-                    <li className="nav-item px-1">
+                    <li className="nav-item m-2">
                         <a href="#progress" className="nav-link">My Progress</a>
                     </li>  
+                    </ul>
+
+                    <div className="container d-flex justify-content-end" >
+                    <ul className="navbar-nav">
+                    <li className="nav-item">
+                    <button className="btn btn-danger m-2" onClick={handleUpdateProfile}>Update Profile</button>
+                    </li>
+                    <li className="nav-item">
+                    <button className="btn btn-danger m-2" onClick={handleDeleteProfile}>Delete Profile</button>
+                    </li>
+                    </ul>
+                    </div>    
                     {/* <!-- <li className="nav-item px-4">
                         <a href="#" className="nav-link "><i className="bi bi-person-circle fs-1"></i></a>
                     </li>   --> */}
                     
                     
-                </ul>
                 {/* <!-- <form className="d-flex px-4" role="search">
                     <input className="form-control me-2" type="search" placeholder="Enter course id">
                     <button className="btn btn-success" type="submit">Search</button>

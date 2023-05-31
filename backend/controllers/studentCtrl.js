@@ -66,6 +66,7 @@ exports.login = async (req, res) => {
         if(existingStudent){
             if(existingStudent.id === req.params.id){
                 sameEmail = true;
+                 //didn't update the email
             } else{
             return res.status(400).json({msg: "Entered email address is already taken by someone else"});
             }
@@ -93,20 +94,21 @@ exports.login = async (req, res) => {
         }
       };
       exports.deleteProfile = async (req, res) => { 
-        objId = req.params.id 
-        console.log("deleteProfile function is called")
+       // console.log("deleteProfile function is called")
         const {email, password} = req.body;
         try {
         let existingStudent = await Student.findOne({email: email}) 
-        console.log(existingStudent);
+        // console.log(existingStudent);
         if(existingStudent){
             const matchPassword = await bcrypt.compare(password, existingStudent.password);
-            console.log(matchPassword);
+           // console.log(matchPassword);
             if(!matchPassword){
                 res.status(404).json( "password is incorrect")
             }
                 //then email and password both have matched
-                const student = await Student.findByIdAndDelete(objId)
+                console.log("req.params.id is: ", req.params.id)
+                await Student.findByIdAndDelete(req.params.id)
+                
                 console.log("deleting the student profile")
                 res.status(200).json("student profile deleted successfully")
         } else{
@@ -134,6 +136,24 @@ exports.login = async (req, res) => {
       } catch(err){
           console.log(err);
           res.status(500).json({message: "Something went wrong in catch part of getCoursesById"});
+      }
+    }
+
+
+    exports.getId = async (req, res) => {
+      const email = req.params.email;
+     // console.log("email is: ", email);
+      try{
+        const student = await Student.findOne({email: email});
+       // console.log("student is: ", student);
+        if(!student){
+          return res.status(404).json({msg: "Student not found"});
+        }
+       // console.log("student id in backend is: ", student.id);
+        res.status(200).json(student);      
+      } catch(err){
+          console.log(err);
+          res.status(500).json({message: "Something went wrong in catch part of getId of student"});
       }
     }
       

@@ -14,6 +14,7 @@ const secret = process.env.JWT_SECRET;
         if(token){
          let student = jwt.verify(token, secret);
          req.id = student.id;
+         console.log("Token verified");
         } else{
             res.status(401).json({message: "Unauthorized User"});
         }
