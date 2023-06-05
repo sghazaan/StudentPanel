@@ -39,29 +39,6 @@ const Login = () => {
 
         // console.log('id is', _id);
          navigate(`/${_id}`);
-
-
-        // try {
-        //   const email = data.email;
-        //  // console.log('email in Login.js is', email);
-        //   const idResponse = await fetch(`http://localhost:3001/students/getId/${email}`, {
-        //     method: 'GET',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //   });
-        //   if(idResponse.ok){
-        //     const { _id } = await idResponse.json(); // Parse the response body as JSON
-        //    // console.log('id is', _id);
-        //     navigate(`/${_id}`);
-        //   } else {
-        //     console.log('else part: Error getting student id from database');
-        //   }
-        // } catch (error) {
-        //   console.error('Error getting student id from database:', error);
-        // }
-
-
       } else {
         // Login failed
         console.log('Login failed');

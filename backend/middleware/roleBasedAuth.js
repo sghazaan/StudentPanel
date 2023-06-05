@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const mongoose = require('mongoose');
+
 
 exports.requireAdminRole = async (req, res, next) => {
   try {
@@ -14,29 +16,19 @@ exports.requireAdminRole = async (req, res, next) => {
 };
 
 exports.requireStudentRole = async (req, res, next) => {
+  const idFromParam = req.params.id;
+const cleanedId = idFromParam.replace(':', ''); 
+const objectId = new mongoose.Types.ObjectId(cleanedId); 
+const studentId = objectId;
+console.log(studentId);
+
+
   try {
-    // try{
-    //   const email = req.body.email;
-    //   console.log("Email is: ", email)
-    //   let u = await User.findOne({ email: email });
-    //   if(!u){
-    //     return res.status(403).json({ msg: 'Student not found' });
-    //   } 
-    //   if(u.role !== 'student'){
-    //     console.log("Access denied: Role of student required")
-    //     return res.status(403).json({ msg: 'Access denied: role of the student required' });
-    //   }
-    //   console.log("Access granted: Role of student was required")
-    //   next();
-    //   return;
-    // }catch(err){
-    //   console.log("Access denied: Role of student required");
-    // }
-    //  res.status(500).send('Server error occured here');
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(studentId);
     if (user.role !== 'student') {
       return res.status(403).json({ msg: 'Access denied: role of the student required' });
     }
+    console.log("Access granted: It is a student2")
     next();
   } catch (err) {
     console.error(err.message);

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
 const Course = require('../models/course');
 const Forum = require('../models/forum');
+const mongoose = require('mongoose');
 exports.enrollCourse = async (req, res) => {    
 try{
     const courseId = req.params.courseId;
@@ -30,21 +31,32 @@ try{
 }
 exports.placeComment = async (req, res) => {
     try{
-        const courseId = req.params.courseId;
-        const studentId = req.params.id;
+        const idFromParam = req.params.courseId;
+        const cleanedId = idFromParam.replace(':', ''); 
+        const objectId = new mongoose.Types.ObjectId(cleanedId); 
+        const courseId = objectId;
+        console.log(courseId);
+        const idFromParam2 = req.params.id;
+        const cleanedId2 = idFromParam2.replace(':', ''); 
+        const objectId2 = new mongoose.Types.ObjectId(cleanedId2); 
+        const studentId = objectId2;
+        console.log("my courseId is: ", courseId);
+        console.log("studentId is: ", studentId);
         const course = await Course.findById(courseId);
         const student = await Student.findById(studentId); 
-        console.log(student);
+       // console.log(student);
         if((!student) || (!course)){
                 res.status(404).json("Either student or course not found");
         }
         const {comment} = req.body;
+        console.log("comment is: ", comment)
         const forumObj = new Forum({
             person: student,
             comment: comment,
             course: course
         });
         await forumObj.save();
+        console.log("forumObj saved successfully");
         res.status(200).json("comment placed successfully");
 
     }catch(err){
@@ -54,19 +66,32 @@ exports.placeComment = async (req, res) => {
 
 exports.viewComments = async (req, res) => {
     try{
-        console.log("viewComments function is called");
-        const courseId = req.params.courseId;
-        const studentId = req.params.id;
-        const course = await Course.findById(courseId);
-        const student = await Student.findById(studentId); 
-        console.log(student);
-        if( (!course)){
-                res.status(404).json("Course not found");
-        }
-        const forumObj = await Forum.find(courseId);
+        const idFromParam = req.params.courseId;
+        const cleanedId = idFromParam.replace(':', ''); 
+        const objectId = new mongoose.Types.ObjectId(cleanedId); 
+        const courseId = objectId;
+        console.log("sHAH rUKH Here");
+        //console.log("my courseId is: ", courseId);
+        // const course = await Course.findById(courseId);
+        // if( (!course)){
+        //         res.status(404).json("Course not found");
+        // }
+        const forumObj = await Forum.find({course: courseId});
+        console.log("forumObj is: ", forumObj);
         res.status(200).json(forumObj);
 
     }catch(err){
         res.status(500).json({message: "Something went wrong in catch part of viewComments"});
     }
+}
+exports.getInstructorById = async (req, res) => {
+    try{
+        const instructorId = req.params.iid;
+        const instructor = await Student.findById(instructorId);
+        console.log("instructor's first name is: ", instructor.firstName)
+        res.status(200).json(instructor);
+    }catch(err){
+        res.status(500).json({message: "Something went wrong in catch part of getInstructorById"});
+    }
+
 }

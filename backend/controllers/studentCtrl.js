@@ -2,6 +2,7 @@ const Student = require('../models/user');
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
 const Course = require('../models/course');
+const mongoose = require('mongoose');
  exports.createStudent = async(req, res) => {
     const { firstName, lastName,  email, password, role } = req.body;
     try{
@@ -106,7 +107,7 @@ exports.login = async (req, res) => {
                 res.status(404).json( "password is incorrect")
             }
                 //then email and password both have matched
-                console.log("req.params.id is: ", req.params.id)
+               // console.log("req.params.id is: ", req.params.id)
                 await Student.findByIdAndDelete(req.params.id)
                 
                 console.log("deleting the student profile")
@@ -129,7 +130,13 @@ exports.login = async (req, res) => {
         }
     }
     exports.getCoursesById = async (req, res) => {
-      const courseId = req.params.courseId;
+      // const courseId = req.params.courseId;
+      // console.log("courseId is: ", courseId)
+      const idFromParam = req.params.courseId;
+      const cleanedId = idFromParam.replace(':', ''); 
+      const objectId = new mongoose.Types.ObjectId(cleanedId); 
+      const courseId = objectId;
+      console.log(courseId);
       try{
         const course = await Course.findById(courseId);
         res.status(200).json(course);      

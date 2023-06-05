@@ -12,6 +12,9 @@ const Home = () => {
         console.log('id in Home.js DEL is', id);
         navigate(`/deleteProfile/${id}}`);
     }
+    const handleViewCourses = () => {
+        navigate(`/${id}/courses`);
+    }
     return(
         <div>
              <section id="nav-bar">
@@ -44,22 +47,13 @@ const Home = () => {
                     </li>
                     </ul>
                     </div>    
-                    {/* <!-- <li className="nav-item px-4">
-                        <a href="#" className="nav-link "><i className="bi bi-person-circle fs-1"></i></a>
-                    </li>   --> */}
-                    
-                    
-                {/* <!-- <form className="d-flex px-4" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Enter course id">
-                    <button className="btn btn-success" type="submit">Search</button>
-                  </form> --> */}
               </div>
             </div>
             </nav>
     </section>
     {/* <!-- navbar ended here -->
     <!-- showcase started --> */}
-    <section className="bg-dark text-light p-5 text-center text-md-start">
+    <section className="bg-dark text-light pt-5 mt-5 text-center text-md-start">
         <div className="container">
             <div className="d-sm-flex align-items-center justify-content-between">
                 <div>
@@ -67,9 +61,10 @@ const Home = () => {
                     <p className="lead my-3 mx-2">We focus on quality learning of students. We equip them with best industrial skills
                         so that they can be ready for the future.
                     </p>
-                    <button className="btn btn-warning btn-lg">Enroll Course</button>
+                    <button className="btn btn-warning btn-lg my-4"
+                     onClick={handleViewCourses}>View Courses</button>
                 </div>
-                <img className="img-fluid w-50 py-4 d-none d-sm-block" src="images/showcase.jpg" alt="Student studying online"/>
+                <img className="img-fluid w-50 py-4 d-none d-sm-block" src="../images/showcase.jpg" alt="Student studying online"/>
             </div>
         </div>
     </section>
@@ -150,14 +145,21 @@ const Home = () => {
         <div className="container">
             <div className= "row align-items-center justify-content-between">
                 <div className="col-md">
-                    <img src="images/learn.jpg" className="img-fluid" alt="Learn"/>
+                    <img src="../images/learn.jpg" className="img-fluid" alt="Learn"/>
                 </div>
                 <div className="col-md p-5">
                     <h1>Learn the Fundamentals of any skill</h1>
                     <p className="lead">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium architecto debitis magnam dolores ratione nobis!
+                    Welcome to our comprehensive education platform, where knowledge meets opportunity!
+                    Our platform offers a wide range of courses designed to empower learners like you
+                     with valuable skills and expertise. Whether you're a student, professional, or 
+                     lifelong learner, we have something for everyone. </p>
+                    <p className="lead">
+                    As you progress through your chosen courses, you'll have opportunities to connect
+                     with a vibrant community of learners. Engage in discussions, share insights, and
+                      collaborate with fellow students, fostering a supportive and enriching learning 
+                      environment.
                     </p>
-                    <p className="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nisi dolor, doloribus distinctio numquam officia provident ab recusandae. Aspernatur laboriosam nobis asperiores sunt dolor, quis dolorem cum? Deserunt, fugit vel!</p>
                     <a href="#" className="btn btn-light mt-3"><i className="bi bi-chevron-right"></i> Read more</a>
                 </div>
             </div>
@@ -171,15 +173,23 @@ const Home = () => {
             <div className="container">
                 <div className= "row align-items-center justify-content-between">
                     <div className="col-md p-5">
-                        <h1>Learn the Fundamentals of any skill</h1>
+                        <h1>Focus on Practical Skills</h1>
                         <p className="lead">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium architecto debitis magnam dolores ratione nobis!
+                        Embark on your educational journey with us and unlock your full potential.
+                         Explore our diverse course offerings, embark on new learning adventures, and
+                          gain the knowledge you need to thrive in today's ever-evolving world.
+                        Join our educational community and embrace the joy of lifelong learning. 
+                        Start your learning journey with us today!                        </p>
+                        <p className="lead">
+                        Upon successful completion of each course, you'll receive a certificate, 
+                        showcasing your accomplishment and validating your newly acquired skills.
+                         These certificates can bolster your resume, enhance your professional profile,
+                          and open doors to exciting career opportunities.
                         </p>
-                        <p className="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nisi dolor, doloribus distinctio numquam officia provident ab recusandae. Aspernatur laboriosam nobis asperiores sunt dolor, quis dolorem cum? Deserunt, fugit vel!</p>
                         <a href="#" className="btn btn-light mt-3"><i className="bi bi-chevron-right"></i> Read more</a>
                     </div>
                     <div className="col-md">
-                        <img src="images/learn.jpg" className="img-fluid" alt="Learn"/>
+                        <img src="../images/learn.jpg" className="img-fluid" alt="Learn2"/>
                     </div>
                 </div>
     
