@@ -40,11 +40,11 @@ const Signup = () => {
           // Handle the response from the backend
           if (response.ok) {
             // Signup successful
-            console.log('Signup successful');
+            // console.log('Signup successful');
             navigate('/login');
           } else {
             // Signup failed
-            console.log('Signup failed');
+            // console.log('Signup failed');
           }
         } catch (error) {
           console.error('Error sending form data:', error);

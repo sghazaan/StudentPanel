@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const app = express();
+const path = require('path');
 
 dotenv.config();
 const StudentRoutes = require('./routes/studentRoutes');
@@ -22,11 +23,12 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 //connection complete
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, './frontend/ourcoursera/build')))
 app.use('/students', StudentRoutes );
-app.get('/', (req, res) => {
-    res.send("Hello World");
-  }
-);
+app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './frontend/ourcoursera/build/index.html'))
+
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

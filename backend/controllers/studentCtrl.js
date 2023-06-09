@@ -22,7 +22,7 @@ const mongoose = require('mongoose');
         const token = auth.setStudent(student);
         res.status(201).json({student: student, token: token});
     } catch(err){
-        console.log(err);
+        // console.log(err);
         res.status(500).json({message: "Something went wrong in catch part of createStudent"});
         //res.json("hello I am catch part of createStudent")
     } 
@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
       if(!matchPassword){
         return res.status(400).json({ msg: 'Invalid password' });
         }
-        console.log("login successful");
+        // console.log("login successful");
        const token = auth.setStudent(student);
        return res.status(201).json({student: student, token: token});
        //res.cookie("uid", token);
@@ -110,7 +110,7 @@ exports.login = async (req, res) => {
                // console.log("req.params.id is: ", req.params.id)
                 await Student.findByIdAndDelete(req.params.id)
                 
-                console.log("deleting the student profile")
+                // console.log("deleting the student profile")
                 res.status(200).json("student profile deleted successfully")
         } else{
             res.status(404).json( "no such user found")
@@ -125,7 +125,7 @@ exports.login = async (req, res) => {
             const courses = await Course.find();
             res.status(200).json(courses);      
         } catch(err){
-            console.log(err);
+            // console.log(err);
             res.status(500).json({message: "Something went wrong in catch part of getAllCourses"});
         }
     }
@@ -136,12 +136,12 @@ exports.login = async (req, res) => {
       const cleanedId = idFromParam.replace(':', ''); 
       const objectId = new mongoose.Types.ObjectId(cleanedId); 
       const courseId = objectId;
-      console.log(courseId);
+      // console.log(courseId);
       try{
         const course = await Course.findById(courseId);
         res.status(200).json(course);      
       } catch(err){
-          console.log(err);
+          // console.log(err);
           res.status(500).json({message: "Something went wrong in catch part of getCoursesById"});
       }
     }
@@ -159,7 +159,7 @@ exports.login = async (req, res) => {
        // console.log("student id in backend is: ", student.id);
         res.status(200).json(student);      
       } catch(err){
-          console.log(err);
+          // console.log(err);
           res.status(500).json({message: "Something went wrong in catch part of getId of student"});
       }
     }

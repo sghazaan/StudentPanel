@@ -59,10 +59,10 @@ const Courses = () => {
         }
       });
       if (response.status === 200) {
-        console.log('Course enrolled successfully');
+        // console.log('Course enrolled successfully');
         window.alert('Course enrolled successfully')
       } else {
-        console.log('Error enrolling course as response not ok');
+        // console.log('Error enrolling course as response not ok');
       }
     }
     catch(error){
@@ -83,14 +83,14 @@ const Courses = () => {
         <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
             <div className="container mt-2 mb-2">
                 <span className="navbar-brand h1 brand-name">Our Courses</span>
-                <form className="d-flex ms-auto p-2 align-items-center" role="search">
+                {/* <form className="d-flex ms-auto p-2 align-items-center" role="search">
                   <div className="px-5">
                   <input className="form-control  custom-input" type="search" placeholder="Enter course id"/>
                   </div>
                   <div className="pl-1">
                   <button className="btn btn-success btn-search " type="submit">Search Course</button>
                   </div>
-                  </form>
+                  </form> */}
                   <button className="btn btn-success btn-danger btn-lg text-light" type="submit" onClick={handleHomePageNav}>Go to Home Page</button>
 
               </div>

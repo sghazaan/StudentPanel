@@ -16,6 +16,8 @@ router.post('/:id/courses/:courseId/enroll', auth.getStudent, studentRoleAuth.re
 router.post('/:id/:courseId/comment', auth.getStudent, studentRoleAuth.requireStudentRole, otherCtrl.placeComment);
 router.get('/:id/:courseId/viewComments', auth.getStudent, studentRoleAuth.requireStudentRole, otherCtrl.viewComments);
 router.get('/:id/instructors/:iid', auth.getStudent, studentRoleAuth.requireStudentRole, otherCtrl.getInstructorById);
+router.get('/:id/:courseId/quizzes', auth.getStudent, studentRoleAuth.requireStudentRole, otherCtrl.getQuizzes);
+
 // router.get('/:id/:courseId/viewComments', auth.getStudent, studentRoleAuth.requireStudentRole, otherCtrl.viewComments);
 //auth.getStudent, 
 

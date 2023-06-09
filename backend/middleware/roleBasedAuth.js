@@ -20,7 +20,7 @@ exports.requireStudentRole = async (req, res, next) => {
 const cleanedId = idFromParam.replace(':', ''); 
 const objectId = new mongoose.Types.ObjectId(cleanedId); 
 const studentId = objectId;
-console.log(studentId);
+// console.log(studentId);
 
 
   try {
@@ -28,7 +28,7 @@ console.log(studentId);
     if (user.role !== 'student') {
       return res.status(403).json({ msg: 'Access denied: role of the student required' });
     }
-    console.log("Access granted: It is a student2")
+    // console.log("Access granted: It is a student2")
     next();
   } catch (err) {
     console.error(err.message);

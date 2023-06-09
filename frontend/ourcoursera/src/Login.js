@@ -31,7 +31,7 @@ const Login = () => {
       });
 
       if (response.ok) {
-        console.log('Login successful');
+        // console.log('Login successful');
         const responseData = await response.json(); // Parse the response body as JSON
         const { _id } = responseData.student;
         const token = responseData.token;
@@ -41,7 +41,7 @@ const Login = () => {
          navigate(`/${_id}`);
       } else {
         // Login failed
-        console.log('Login failed');
+        // console.log('Login failed');
       }
     } catch (error) {
       console.error('Error sending form data:', error);

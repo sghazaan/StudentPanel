@@ -6,6 +6,7 @@ const CoursePage = () => {
     const [course, setCourse] = useState("");
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
+    const[quizzes, setQuizzes] = useState([]);
     const token = localStorage.getItem('token');
     useEffect(() => {
        // console.log("useEffect called")
@@ -24,7 +25,7 @@ const CoursePage = () => {
 
 //view comments request
     useEffect(() => {
-         console.log("useEffect called for comments")
+        //  console.log("useEffect called for comments")
              fetch(`http://localhost:3001/students/:${id}/:${courseId}/viewComments`, {
              headers: {
                  Authorization: `Bearer ${token}`
@@ -37,6 +38,33 @@ const CoursePage = () => {
          )
          .catch(error => console.error(error));
      }, [comment]);
+
+
+
+//view quizzes
+     useEffect(() => {
+        // console.log("useEffect called for quizzes")
+            fetch(`http://localhost:3001/students/:${id}/:${courseId}/quizzes`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => response.json()) // Parse the response data
+        .then(data => {
+            setQuizzes(data);
+            // console.log(data)
+            quizzes.forEach(quiz => {
+                if (quiz.questions === null) {
+                //   console.log("Questions array is null");
+                } else {
+                //   console.log("Questions array is not null");
+                }
+              });
+            //   console.log("hiiii");
+        }
+        )
+        .catch(error => console.error(error));
+    }, []);
 
 
 
@@ -61,9 +89,9 @@ const CoursePage = () => {
        // console.log(response.status);
        const status = response.status;
        if(status === 200){
-           console.log("comment placed successfully");
+        //    console.log("comment placed successfully");
          } else{
-                console.log("comment failed");
+                // console.log("comment failed");
             }
     }
     return(
@@ -112,6 +140,31 @@ const CoursePage = () => {
                       </div>
                     </form>
                     </div>
+
+
+
+                    <div>
+  <h2>Quiz</h2>
+  {/* <h3>Hello man</h3> */}
+  {/* {quizzes && quizzes.questions && quizzes.questions.map((question, index) => ( */}
+  {quizzes && quizzes.map((quiz, index) => (
+  <div key={index}>
+    <h3>Quiz {index + 1}</h3>
+    {quiz.questions && quiz.questions.map((question, questionIndex) => (
+      <div key={questionIndex}>
+        <h4>Question {questionIndex + 1}</h4>
+        <p>{question.question}</p>
+        <ul>
+          {question.options && question.options.map((option, optionIndex) => (
+            <li key={optionIndex}>{option.text}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+))}
+
+</div>
                     
                    
 

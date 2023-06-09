@@ -2,6 +2,7 @@ const Student = require('../models/user');
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
 const Course = require('../models/course');
+const Quiz = require('../models/quizSchema');
 const Forum = require('../models/forum');
 const mongoose = require('mongoose');
 exports.enrollCourse = async (req, res) => {    
@@ -94,4 +95,23 @@ exports.getInstructorById = async (req, res) => {
         res.status(500).json({message: "Something went wrong in catch part of getInstructorById"});
     }
 
+}
+exports.getQuizzes = async (req, res) => {
+    console.log("getQuizzes is called");
+    try{
+        const idFromParam = req.params.courseId;
+        const cleanedId = idFromParam.replace(':', ''); 
+        const objectId = new mongoose.Types.ObjectId(cleanedId); 
+        const courseId = objectId     
+          console.log("courseId is backend is: ", courseId);
+        const quizzes = await Quiz.find({course: courseId}); 
+        console.log("quizzes are: ", quizzes);  
+        if(!quizzes){
+            res.status(404).json("No quizzes found");
+        } 
+        res.status(200).json(quizzes);
+
+    } catch(err){
+        res.status(500).json({message: "Something went wrong in catch part of getQuizzes"});
+    }
 }

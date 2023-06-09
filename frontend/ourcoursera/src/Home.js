@@ -4,12 +4,12 @@ const Home = () => {
     const { id } = useParams();
     const  navigate = useNavigate();
     const handleUpdateProfile = () => {
-         console.log('id in Home.js UPDATE is', id);
+        //  console.log('id in Home.js UPDATE is', id);
         navigate(`/updateProfile/${id}`);
 
     }
     const handleDeleteProfile = () => {
-        console.log('id in Home.js DEL is', id);
+        // console.log('id in Home.js DEL is', id);
         navigate(`/deleteProfile/${id}}`);
     }
     const handleViewCourses = () => {
@@ -25,9 +25,9 @@ const Home = () => {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarMenu">
-                <ul className="navbar-nav flex-colum">
+                {/* <ul className="navbar-nav flex-colum">
                     <li className="nav-item m-2">
-                        <a href="#allCourses" className="nav-link">All Courses</a>
+                        <a navigate={`/${id}/courses`} className="nav-link" onClick={handleViewCourses}>All Courses</a>
                     </li>
                     <li className="nav-item m-2">
                         <a href="#allInstructors" className="nav-link">All Instructors</a>
@@ -35,7 +35,7 @@ const Home = () => {
                     <li className="nav-item m-2">
                         <a href="#progress" className="nav-link">My Progress</a>
                     </li>  
-                    </ul>
+                    </ul> */}
 
                     <div className="container d-flex justify-content-end" >
                     <ul className="navbar-nav">
@@ -70,7 +70,7 @@ const Home = () => {
     </section>
     {/* <!-- showcase ended here -->
     <!-- newsletter started --> */}
-    <section className="bg-warning text-tertiary p-5">
+    {/* <section className="bg-warning text-tertiary p-5">
         <div className="conatiner">
             <div className="d-md-flex justify-content-between align-items-center">
                 <h3 className="mb-3 mb-md-0">Sign up for our newsletter:</h3>
@@ -81,7 +81,7 @@ const Home = () => {
 
             </div>
         </div>
-    </section>
+    </section> */}
     {/* <!-- newsletter ended -->
     <!-- boxes started --> */}
     <section className="p-5 bg-warning-subtle">

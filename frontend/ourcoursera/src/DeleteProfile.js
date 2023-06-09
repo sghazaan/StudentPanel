@@ -25,7 +25,7 @@ const DeleteProfile = () => {
   const sendFormData = async (data) => {
     try {
         const token = localStorage.getItem('token'); 
-        console.log('id is', cleanedId);
+        // console.log('id is', cleanedId);
       const response = await fetch(`http://localhost:3001/students/deleteProfile/${cleanedId}`, {
         method: 'DELETE',
         headers: {
@@ -39,12 +39,12 @@ const DeleteProfile = () => {
       if (response.ok) {
         // Delete Profile successful
        // const email = data.email;
-        console.log('Delete Profile successful');
+        // console.log('Delete Profile successful');
         navigate('/login');
 
       } else {
         // Delete Profile failed
-        console.log('Delete Profile failed');
+        // console.log('Delete Profile failed');
       }
     } catch (error) {
       console.error('Error sending form data:', error);

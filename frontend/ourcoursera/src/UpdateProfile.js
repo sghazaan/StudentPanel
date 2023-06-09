@@ -29,7 +29,7 @@ const UpdateProfile = () => {
       const sendFormData = async (data) => {
         try {
           const token = localStorage.getItem('token'); 
-            console.log('id is', id); 
+            // console.log('id is', id); 
           const response = await fetch(`http://localhost:3001/students/updateProfile/${id}`, {
             method: 'PUT',
             headers: {
@@ -43,11 +43,11 @@ const UpdateProfile = () => {
           // Handle the response from the backend
           if (response.ok) {
             // Update successful
-            console.log('Update successful');
+            // console.log('Update successful');
             navigate(`/${id}`);
           } else {
             // Update failed
-            console.log('Update failed');
+            // console.log('Update failed');
           }
         } catch (error) {
           console.error('Error sending form data:', error);
